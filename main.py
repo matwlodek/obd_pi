@@ -1,4 +1,4 @@
-import cad_start as cs
+import cad_display as cs
 
 cs.start_screen()
 cs.check_cable()
