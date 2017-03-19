@@ -1,4 +1,4 @@
-import cad_display as cd
+import cad as cd
 import cad_control as cc
 
 cd.start_screen()
