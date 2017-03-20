@@ -9,3 +9,11 @@ def serial_port():
 
 def car_conn_status():
     return sync_conn.status()
+
+
+def mode3():
+    return obd.commands.GET_DTC.value
+
+
+def vin():
+    return obd.commands.VIN.value

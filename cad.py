@@ -43,20 +43,30 @@ def start_screen():
 
 
 def main_menu():
-    question = LCDQuestion(question="*MAIN MENU*", answers=['START', 'OPTIONS', 'ERRORS', 'QUIT'])
+    question = LCDQuestion(question="*MAIN MENU*", answers=['START', 'DTC', 'MY VIN'])
     result = question.ask()
     if result == 0:
-
         check_cable()
+        # TO DO
+        # ASYNC OBD
+        # CAD SHOW DATA WITH SCROLL OPTION / SHOW NEXT SCREEN
+        # MYSQL DATA INJECTOR
     if result == 1:
         cad.lcd.clear()
-        cad.lcd.write('options')
+        cad.lcd.set_cursor(0, 0)
+        cad.lcd.cursor_off()
+        cad.lcd.write('DIAGNOSTIC TROUBLE CODE')
+        cad.lcd.set_cursor(0, 1)
+        cad.lcd.cursor_off()
+        cad.lcd.write(oc.mode3())
     if result == 2:
         cad.lcd.clear()
-        cad.lcd.write('errors')
-    if result == 3:
-        cad.lcd.clear()
-        cad.lcd.write('quit')
+        cad.lcd.set_cursor(0, 0)
+        cad.lcd.cursor_off()
+        cad.lcd.write('MY VIN IS:')
+        cad.lcd.set_cursor(0, 1)
+        cad.lcd.cursor_off()
+        cad.lcd.write(oc.vin())
     return
 
 
