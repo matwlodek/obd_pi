@@ -1,9 +1,13 @@
 import time
-
 import pifacecad
+from pifacecad.tools.question import LCDQuestion
+import obd_connection as oc
+
+
 cad = pifacecad.PiFaceCAD()
 cad.lcd.backlight_on()
 cad.lcd.clear()
+
 
 def start_screen():
     cad.lcd.set_cursor(5, 0)
@@ -37,7 +41,24 @@ def start_screen():
     cad.lcd.clear()
     return
 
-import obd_connection as oc
+
+def main_menu():
+    question = LCDQuestion(question="*MAIN MENU*", answers=['START', 'OPTIONS', 'ERRORS', 'QUIT'])
+    result = question.ask()
+    if result == 0:
+
+        check_cable()
+    if result == 1:
+        cad.lcd.clear()
+        cad.lcd.write('options')
+    if result == 2:
+        cad.lcd.clear()
+        cad.lcd.write('errors')
+    if result == 3:
+        cad.lcd.clear()
+        cad.lcd.write('quit')
+    return
+
 
 def check_serial_port():
     cad.lcd.set_cursor(0, 0)
@@ -49,30 +70,33 @@ def check_serial_port():
     time.sleep(3)
     return
 
+
 def check_cable():
     while True:
-        cad.lcd.clear()
-        cad.lcd.set_cursor(0, 0)
-        cad.lcd.cursor_off()
-        cad.lcd.write("Connect OBD2")
-        cad.lcd.set_cursor(0, 1)
-        cad.lcd.cursor_off()
-        cad.lcd.write("cable now")
-        time.sleep(3)
-        cad.lcd.clear()
-        cad.lcd.set_cursor(0, 0)
-        cad.lcd.cursor_off()
-        cad.lcd.write("Connecting...")
-        for x in range(0, 16, 1):
-            cad.lcd.set_cursor(x, 1)
-            cad.lcd.cursor_off()
-            cad.lcd.write("*")
-            time.sleep(0.5)
-        cad.lcd.clear()
-        cad.lcd.set_cursor(0, 0)
-        cad.lcd.cursor_off()
-        cad.lcd.write(oc.car_conn_status())
-        time.sleep(10)
-        if oc.car_conn_status()!="Not Connected":
+        question = LCDQuestion(question="Cable connected?", answers=['Yes', 'No'])
+        result = question.ask()
+        if result==0:
             break
+        if result==1:
+            cad.lcd.clear()
+            cad.lcd.set_cursor(0, 0)
+            cad.lcd.cursor_off()
+            cad.lcd.write("Connect OBD2")
+            cad.lcd.set_cursor(0, 1)
+            cad.lcd.cursor_off()
+            cad.lcd.write("cable now")
+            time.sleep(3)
+            cad.lcd.clear()
+            cad.lcd.set_cursor(0, 0)
+            cad.lcd.cursor_off()
+            cad.lcd.write("Waiting...")
+            for x in range(0, 16, 1):
+                cad.lcd.set_cursor(x, 1)
+                cad.lcd.cursor_off()
+                cad.lcd.write("*")
+                time.sleep(0.5)
+            cad.lcd.clear()
+            cad.lcd.set_cursor(0, 0)
+            cad.lcd.cursor_off()
     return
+

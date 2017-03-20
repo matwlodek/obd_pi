@@ -1,6 +1,4 @@
-import cad as cd
-import cad_control as cc
+import cad
 
-cd.start_screen()
-cd.check_cable()
-cd.check_serial_port()
+cad.start_screen()
+cad.main_menu()
