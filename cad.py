@@ -46,7 +46,7 @@ def main_menu():
     question = LCDQuestion(question="*MAIN MENU*", answers=['START', 'DTC', 'MY VIN'])
     result = question.ask()
     if result == 0:
-        check_cable()
+        cad.lcd.clear()
         # TO DO
         # ASYNC OBD
         # CAD SHOW DATA WITH SCROLL OPTION / SHOW NEXT SCREEN
