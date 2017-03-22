@@ -2,7 +2,7 @@ import mysql_connection_settings as mcs
 
 cursor = mcs.mysql_conn.cursor()
 
-add_dtc_and_description = ("INSERT INTO diagnostic_trouble_code_base "
+add_dtc_and_description = ("INSERT INTO diagnostic_trouble_code_db "
                            "(dtc_code, technical_description) "
                            "VALUES (%s, %s)")
 

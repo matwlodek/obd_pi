@@ -3,7 +3,6 @@ import pifacecad
 from pifacecad.tools.question import LCDQuestion
 import obd_connection as oc
 
-
 cad = pifacecad.PiFaceCAD()
 cad.lcd.backlight_on()
 cad.lcd.clear()
@@ -59,6 +58,18 @@ def main_menu():
         cad.lcd.set_cursor(0, 1)
         cad.lcd.cursor_off()
         cad.lcd.write(oc.mode3())
+        time.sleep(5)
+        cad.lcd.clear()
+        cad.lcd.set_cursor(0, 0)
+        cad.lcd.cursor_off()
+        cad.lcd.write(oc.mode3())
+        cad.lcd.set_cursor(0, 1)
+        cad.lcd.cursor_off()
+        cad.lcd.write()
+        # TO DO
+        # LOOP MOVE RIGHT-LEFT UNTIL BUTTON PRESS
+        cad.lcd.move_right()
+        cad.lcd.move_left()
     if result == 2:
         cad.lcd.clear()
         cad.lcd.set_cursor(0, 0)
@@ -85,9 +96,9 @@ def check_cable():
     while True:
         question = LCDQuestion(question="Cable connected?", answers=['Yes', 'No'])
         result = question.ask()
-        if result==0:
+        if result == 0:
             break
-        if result==1:
+        if result == 1:
             cad.lcd.clear()
             cad.lcd.set_cursor(0, 0)
             cad.lcd.cursor_off()
