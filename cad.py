@@ -2,6 +2,7 @@ import time
 import pifacecad
 from pifacecad.tools.question import LCDQuestion
 import obd_connection as oc
+import mysql_connection as mc
 
 cad = pifacecad.PiFaceCAD()
 cad.lcd.backlight_on()
@@ -57,15 +58,15 @@ def main_menu():
         cad.lcd.write('DIAGNOSTIC TROUBLE CODE')
         cad.lcd.set_cursor(0, 1)
         cad.lcd.cursor_off()
-        cad.lcd.write(oc.mode3())
+        cad.lcd.write(str(oc.mode3()))
         time.sleep(5)
         cad.lcd.clear()
         cad.lcd.set_cursor(0, 0)
         cad.lcd.cursor_off()
-        cad.lcd.write(oc.mode3())
+        cad.lcd.write(str(oc.mode3()))
         cad.lcd.set_cursor(0, 1)
         cad.lcd.cursor_off()
-        cad.lcd.write()
+        cad.lcd.write(mc.dtc_check_db())
         # TO DO
         # LOOP MOVE RIGHT-LEFT UNTIL BUTTON PRESS
         cad.lcd.move_right()
@@ -77,7 +78,7 @@ def main_menu():
         cad.lcd.write('MY VIN IS:')
         cad.lcd.set_cursor(0, 1)
         cad.lcd.cursor_off()
-        cad.lcd.write(oc.vin())
+        cad.lcd.write(str(oc.vin()))
     return
 
 
