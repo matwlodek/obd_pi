@@ -24,6 +24,13 @@
             </list>
           </settings>
         </remote-mappings>
+        <remote-mappings server-id="python@ssh://pi@172.20.10.4:22/usr/bin/python3.4">
+          <settings>
+            <list>
+              <mapping local-root="$PROJECT_DIR$" remote-root="/home/pi/pycharm/python3.4" />
+            </list>
+          </settings>
+        </remote-mappings>
       </list>
     </list>
   </component>
